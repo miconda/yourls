@@ -1,4 +1,5 @@
 yourls
 ======
 
-Extensions for yourls http link shortner
+Extensions for yourls http link shortner:
+  * http://yourls.org/
