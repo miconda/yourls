@@ -16,7 +16,7 @@ function popularclicks_add_page() {
 // Display popular clicks
 function popularclicks_do_page() {
 	$nonce = yourls_create_nonce('popular_clickks');
-	echo '<h2>Popular Clicks</h2';
+	echo '<h2>Popular Clicks</h2>';
 
 	function show_top($numdays,$numrows) {
 		global $ydb;
