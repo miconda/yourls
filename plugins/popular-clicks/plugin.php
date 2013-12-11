@@ -35,7 +35,8 @@ function popularclicks_do_page() {
 	
 		if ($query) {
 			foreach( $query as $query_result ) {
-				$outdata .= '<tr><td>' . $query_result->clicks . '</td><td>' . $query_result->shorturl
+                $outdata .= '<tr><td>' . $query_result->clicks . '</td><td><a href="' .$base .'/' . $query_result->shorturl .'+" target="blank">'
+                    . $query_result->shorturl .'</a>'
 					. '</td><td><a href="' . $query_result->longurl .'" target="blank">'
 					. $query_result->longurl . '</td></tr>';
 			}
