@@ -31,14 +31,15 @@ function popularclicks_do_page() {
 			  INTERVAL 30 DAY)<a.click_time GROUP BY a.shorturl ORDER BY count(*) DESC LIMIT 20;
 		 */
 
-		$query = $ydb->get_results("SELECT a.shorturl AS shorturl, count(*) AS clicks, b.url AS longurl FROM `$table_log` a, `$table_url` b WHERE a.shorturl=b.keyword AND DATE_SUB(NOW(), INTERVAL $numdays DAY)<a.click_time GROUP BY a.shorturl ORDER BY count(*) DESC LIMIT $numrows");
+		$sql = "SELECT a.shorturl AS shorturl, count(*) AS clicks, b.url AS longurl FROM `$table_log` a, `$table_url` b WHERE a.shorturl=b.keyword AND DATE_SUB(NOW(), INTERVAL $numdays DAY)<a.click_time GROUP BY a.shorturl ORDER BY count(*) DESC LIMIT $numrows";
+		$query = $ydb->fetchAll($sql);
 	
 		if ($query) {
 			foreach( $query as $query_result ) {
-                $outdata .= '<tr><td>' . $query_result->clicks . '</td><td><a href="' .$base .'/' . $query_result->shorturl .'+" target="blank">'
-                    . $query_result->shorturl .'</a>'
-					. '</td><td><a href="' . $query_result->longurl .'" target="blank">'
-					. $query_result->longurl . '</td></tr>';
+                $outdata .= '<tr><td>' . $query_result['clicks'] . '</td><td><a href="' .$base .'/' . $query_result['shorturl'] .'+" target="blank">'
+                    . $query_result['shorturl'] .'</a>'
+					. '</td><td><a href="' . $query_result['longurl'] .'" target="blank">'
+					. $query_result['longurl'] . '</td></tr>';
 			}
 		}
 		echo '<h3><b>Popular Clicks in the Last '. $numdays . ' Days:</b></h3><br/>'
